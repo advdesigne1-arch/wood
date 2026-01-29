@@ -1,13 +1,6 @@
-/* ================================================================
-   BOUALEM BOIS - RESPONSIVE CSS (MOBILE-FIRST)
-   
-   BREAKPOINTS:
-   - Mobile: ≤ 480px (Default - Single column)
-   - Tablet: 481px - 1024px (2 columns)
-   - Desktop: ≥ 1025px (3 columns)
-   
-   APPROACH: Mobile-first → scales up with media queries
-   ================================================================ */
+/* ===============================================
+   BOUALEM BOIS - Responsive CSS (Mobile-First)
+   =============================================== */
 
 :root {
   --bg: #e9e6e1;
@@ -22,15 +15,9 @@
   --border: rgba(0, 0, 0, 0.08);
 }
 
-/* ================================================================
-   RESET & BASE STYLES
-   ================================================================ */
+/* =========== RESET & BASE =========== */
 * {
   box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 html, body {
@@ -53,7 +40,6 @@ body {
   ), var(--bg);
   overflow-x: hidden;
   background-attachment: fixed;
-  line-height: 1.6;
 }
 
 a {
@@ -66,19 +52,15 @@ button {
   cursor: pointer;
 }
 
-/* ================================================================
-   MAIN CONTAINER (Mobile-first: full width, then constrained)
-   ================================================================ */
+/* =========== LAYOUT CONTAINER =========== */
 .wrap {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 14px 12px 40px; /* Mobile: small padding */
+  padding: 16px 12px 48px;
 }
 
-/* ================================================================
-   HEADER / TOPBAR
-   ================================================================ */
+/* =========== TOPBAR/HEADER (MOBILE-FIRST) =========== */
 .topbar {
   position: sticky;
   top: 0;
@@ -93,19 +75,16 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 8px 12px; /* Mobile: tight padding */
+  padding: 8px 12px;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   flex-wrap: wrap;
 }
 
-/* Logo */
 .logoLink {
   text-decoration: none;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
 }
 
 .logo {
@@ -135,19 +114,19 @@ button {
 }
 
 .logoText b {
-  font-size: 14px;
-  letter-spacing: 0.3px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
   font-weight: 800;
   color: #000;
 }
 
 .logoText span {
-  font-size: 9px;
+  font-size: 10px;
   color: var(--muted);
   font-weight: 600;
 }
 
-/* Navigation - Hidden on mobile, shown on tablet+ */
+/* NAVBAR - Hidden on mobile */
 .nav {
   display: none;
   gap: 8px;
@@ -161,14 +140,13 @@ button {
   padding: 8px 10px;
   border-radius: 10px;
   transition: background 0.2s;
-  white-space: nowrap;
 }
 
 .nav a:hover {
   background: rgba(255, 255, 255, 0.55);
 }
 
-/* Actions (Buttons) - Stack on mobile, flex on larger screens */
+/* ACTION BUTTONS */
 .actions {
   display: flex;
   gap: 6px;
@@ -180,7 +158,7 @@ button {
 
 .btn {
   border: 0;
-  padding: 9px 12px;
+  padding: 8px 12px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(0, 0, 0, 0.07);
@@ -190,10 +168,6 @@ button {
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
-  min-height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .btn:hover {
@@ -211,9 +185,7 @@ button {
   border: 0;
 }
 
-/* ================================================================
-   HERO BANNER
-   ================================================================ */
+/* =========== HERO BANNER =========== */
 .heroBanner {
   width: 100%;
   height: 140px;
@@ -226,9 +198,7 @@ button {
   margin: 10px 0 14px;
 }
 
-/* ================================================================
-   SECTIONS (Generic styling for all sections)
-   ================================================================ */
+/* =========== SECTIONS =========== */
 .section {
   background: var(--panel);
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -275,7 +245,7 @@ button {
   background: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 999px;
-  padding: 11px 14px;
+  padding: 10px 12px;
   outline: none;
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
   font-size: 13px;
@@ -287,13 +257,11 @@ button {
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
 }
 
-/* ================================================================
-   ERROR MESSAGE
-   ================================================================ */
+/* =========== ERROR MESSAGE =========== */
 .error {
   display: none;
   margin: 10px 0 0;
-  padding: 12px;
+  padding: 12px 12px;
   border-radius: 12px;
   background: rgba(255, 100, 100, 0.15);
   border: 1px solid rgba(255, 100, 100, 0.3);
@@ -306,9 +274,7 @@ button {
   display: block;
 }
 
-/* ================================================================
-   CARDS GRID - MOBILE FIRST (1 column on mobile)
-   ================================================================ */
+/* =========== GRID LAYOUT (MOBILE: 1 COLUMN) =========== */
 .cardsGrid {
   display: grid;
   grid-template-columns: 1fr;
@@ -316,15 +282,13 @@ button {
 }
 
 .card {
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(0, 0, 0, 0.07);
   box-shadow: 0 12px 34px rgba(0, 0, 0, 0.10);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
 }
 
 .card:active {
@@ -338,7 +302,7 @@ button {
 
 .cardMedia {
   width: 100%;
-  aspect-ratio: 3/2;
+  height: 180px;
   background: #f3f3f3;
   overflow: hidden;
 }
@@ -353,14 +317,11 @@ button {
 
 .cardBody {
   padding: 12px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
 }
 
 .cardTitle {
   margin: 0 0 6px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.2px;
 }
@@ -371,7 +332,7 @@ button {
   font-weight: 600;
   font-size: 12px;
   line-height: 1.35;
-  flex: 1;
+  min-height: 32px;
 }
 
 .cardActions {
@@ -385,18 +346,13 @@ button {
   flex: 1;
   border: 1px solid rgba(0, 0, 0, 0.10);
   background: rgba(255, 255, 255, 0.9);
-  padding: 10px;
+  padding: 8px 10px;
   border-radius: 999px;
   font-weight: 800;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   transition: all 0.2s;
   text-align: center;
-  white-space: nowrap;
-  min-height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .pill:active {
@@ -404,7 +360,7 @@ button {
 }
 
 .tag {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   padding: 6px 10px;
   border-radius: 999px;
@@ -412,9 +368,7 @@ button {
   white-space: nowrap;
 }
 
-/* ================================================================
-   WHY SECTION - INFO BOXES
-   ================================================================ */
+/* =========== WHY SECTION - INFO BOXES =========== */
 .boxGrid {
   display: grid;
   grid-template-columns: 1fr;
@@ -424,14 +378,14 @@ button {
 .box {
   background: rgba(255, 255, 255, 0.82);
   border: 1px solid rgba(0, 0, 0, 0.07);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 12px;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
 }
 
 .box h3 {
   margin: 0 0 8px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -440,12 +394,8 @@ button {
   gap: 8px;
   color: rgba(0, 0, 0, 0.78);
   font-weight: 700;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.4;
-}
-
-.list p {
-  margin: 0;
 }
 
 .actionsRow {
@@ -455,15 +405,14 @@ button {
   margin-top: 10px;
 }
 
-/* ================================================================
-   CONTACT SECTION
-   ================================================================ */
+/* =========== CONTACT GRID =========== */
 .grid2 {
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
 }
 
+/* =========== NEW CONTACT LAYOUT =========== */
 .contactLayout {
   display: grid;
   grid-template-columns: 1fr;
@@ -479,7 +428,7 @@ button {
 .mapContainer {
   width: 100%;
   height: 400px;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
   box-shadow: var(--shadow);
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -502,9 +451,7 @@ button {
   text-decoration: underline;
 }
 
-/* ================================================================
-   MODAL
-   ================================================================ */
+/* =========== MODAL =========== */
 .noScroll {
   overflow: hidden;
 }
@@ -535,7 +482,7 @@ button {
   max-width: 900px;
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(0, 0, 0, 0.10);
-  border-radius: 18px;
+  border-radius: 20px;
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.35);
   overflow: auto;
   max-height: 90vh;
@@ -567,9 +514,9 @@ button {
 }
 
 .modalClose {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
   border: 1px solid rgba(0, 0, 0, 0.10);
   background: rgba(255, 255, 255, 0.9);
   cursor: pointer;
@@ -592,8 +539,8 @@ button {
 
 .modalMain {
   background: #f3f3f3;
-  min-height: 250px;
-  border-radius: 12px;
+  min-height: 280px;
+  border-radius: 14px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -613,7 +560,7 @@ button {
 
 .modalSide h4 {
   margin: 0 0 8px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -626,7 +573,7 @@ button {
 .thumb {
   padding: 0;
   border: 1px solid rgba(0, 0, 0, 0.10);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
   background: #fff;
   cursor: pointer;
@@ -645,13 +592,12 @@ button {
   display: block;
 }
 
-/* ================================================================
-   TABLET BREAKPOINT (481px - 1024px)
-   Shows 2 columns, improves spacing, displays nav
-   ================================================================ */
-@media (min-width: 481px) {
+/* ========================================
+   TABLET BREAKPOINT (640px and up)
+   ======================================== */
+@media (min-width: 640px) {
   .wrap {
-    padding: 16px 16px 48px;
+    padding: 18px 16px 48px;
   }
 
   .topbarInner {
@@ -663,20 +609,12 @@ button {
     display: flex;
   }
 
-  .logo {
-    padding: 9px 13px;
-  }
-
-  .logoText b {
-    font-size: 15px;
-  }
-
   .actions {
-    gap: 8px;
+    gap: 10px;
   }
 
   .btn {
-    padding: 10px 13px;
+    padding: 10px 14px;
     font-size: 12px;
   }
 
@@ -699,10 +637,6 @@ button {
     font-size: 22px;
   }
 
-  .hSub {
-    font-size: 13px;
-  }
-
   .tools {
     flex-direction: row;
     justify-content: space-between;
@@ -711,39 +645,42 @@ button {
 
   .search {
     width: 100%;
-    max-width: 350px;
+    max-width: 400px;
   }
 
-  /* ===== GRID: 2 COLUMNS ON TABLET ===== */
+  /* GRID: 2 COLUMNS ON TABLET */
   .cardsGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
 
   .card {
-    border-radius: 16px;
+    border-radius: 18px;
+  }
+
+  .cardMedia {
+    height: 160px;
+  }
+
+  .cardBody {
+    padding: 12px;
   }
 
   .cardTitle {
     font-size: 16px;
   }
 
-  /* ===== WHY SECTION: 2 COLUMNS ===== */
+  .cardDesc {
+    font-size: 12px;
+    min-height: 32px;
+  }
+
+  /* WHY SECTION */
   .boxGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
   }
 
-  .box {
-    padding: 14px;
-    border-radius: 16px;
-  }
-
-  .box h3 {
-    font-size: 14px;
-  }
-
-  /* ===== CONTACT: Side by side (info left, map right) ===== */
+  /* CONTACT */
   .grid2 {
     grid-template-columns: 1.1fr 0.9fr;
   }
@@ -752,11 +689,14 @@ button {
     grid-template-columns: 1fr 1fr;
   }
 
+  .contactInfo {
+    grid-template-columns: 1fr;
+  }
+
   .mapContainer {
     height: 350px;
   }
 
-  /* ===== MODAL IMPROVEMENTS ===== */
   .modalPanel {
     width: 90%;
   }
@@ -766,22 +706,21 @@ button {
   }
 }
 
-/* ================================================================
-   DESKTOP BREAKPOINT (1025px+)
-   Shows 3 columns, max-width constraint, full feature display
-   ================================================================ */
-@media (min-width: 1025px) {
+/* ========================================
+   DESKTOP BREAKPOINT (960px and up)
+   ======================================== */
+@media (min-width: 960px) {
   .wrap {
-    padding: 20px 24px 48px;
+    padding: 22px 26px 48px;
   }
 
   .topbarInner {
     gap: 14px;
-    padding: 11px 24px;
+    padding: 10px 26px;
   }
 
   .logo {
-    padding: 9px 14px;
+    padding: 8px 12px;
   }
 
   .logoDot {
@@ -790,8 +729,7 @@ button {
   }
 
   .logoText b {
-    font-size: 16px;
-    letter-spacing: 0.4px;
+    font-size: 14px;
   }
 
   .logoText span {
@@ -802,9 +740,12 @@ button {
     gap: 16px;
     font-size: 13px;
   }
+    gap: 16px;
+    font-size: 13px;
+  }
 
   .nav a {
-    padding: 10px 12px;
+    padding: 10px 10px;
     border-radius: 12px;
   }
 
@@ -813,23 +754,22 @@ button {
   }
 
   .btn {
-    padding: 11px 14px;
+    padding: 10px 14px;
     font-size: 13px;
   }
 
   .heroBanner {
-    height: 200px;
+    height: 210px;
     margin: 14px 0 18px;
   }
 
   .section {
-    padding: 18px;
-    margin-bottom: 16px;
+    padding: clamp(14px, 2vw, 20px);
+    margin-bottom: 14px;
   }
 
   .hTitle {
     font-size: 24px;
-    margin: 0 0 8px;
   }
 
   .hSub {
@@ -837,76 +777,74 @@ button {
   }
 
   .search {
-    max-width: 400px;
+    max-width: 420px;
+    padding: 10px 14px;
   }
 
-  /* ===== GRID: 3 COLUMNS ON DESKTOP ===== */
+  /* GRID: 3 COLUMNS ON DESKTOP */
   .cardsGrid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 18px;
   }
 
   .card {
-    border-radius: 18px;
+    border-radius: 20px;
   }
 
   .cardMedia {
-    aspect-ratio: 16/10;
+    height: 170px;
   }
 
   .cardBody {
-    padding: 14px;
+    padding: 14px 14px 16px;
   }
 
   .cardTitle {
-    font-size: 17px;
-    margin: 0 0 8px;
+    font-size: 18px;
+    margin: 0 0 6px;
   }
 
   .cardDesc {
     font-size: 13px;
-    min-height: 40px;
+    min-height: 36px;
   }
 
-  /* ===== WHY SECTION: 3 COLUMNS ===== */
+  /* WHY SECTION */
   .boxGrid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
   }
 
   .box {
-    padding: 16px;
+    padding: 14px;
     border-radius: 18px;
   }
 
   .box h3 {
-    font-size: 15px;
     margin: 0 0 10px;
+    font-size: 16px;
   }
 
   .list {
     gap: 10px;
-    font-size: 13px;
+    font-size: 14px;
   }
 
-  /* ===== CONTACT: INFO LEFT, MAP RIGHT (Full width) ===== */
+  /* CONTACT */
+  .grid2 {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+
   .contactLayout {
-    grid-template-columns: 1fr 1.3fr;
-    gap: 16px;
-  }
-
-  .contactInfo {
-    display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1.2fr;
   }
 
   .mapContainer {
-    height: 420px;
+    height: 400px;
   }
 
-  /* ===== MODAL: 2-COLUMN LAYOUT ===== */
+  /* MODAL */
   .modalPanel {
-    width: min(900px, calc(100% - 32px));
+    width: min(980px, calc(100% - 24px));
   }
 
   .modalBody {
@@ -916,7 +854,6 @@ button {
 
   .modalMain {
     min-height: 360px;
-    border-radius: 0;
   }
 
   .modalSide {
@@ -939,32 +876,35 @@ button {
   }
 }
 
-/* ================================================================
-   LARGE DESKTOP (1440px+)
-   Uses clamp() for fluid scaling
-   ================================================================ */
-@media (min-width: 1440px) {
+/* ========================================
+   LARGE DESKTOP (1200px and up)
+   ======================================== */
+@media (min-width: 1200px) {
   .wrap {
-    padding: 24px clamp(24px, 5vw, 60px) 48px;
+    padding: 22px clamp(12px, 3vw, 26px) 48px;
   }
 
   .topbarInner {
-    padding: 12px clamp(24px, 5vw, 60px);
-  }
-
-  .hTitle {
-    font-size: clamp(22px, 2.5vw, 28px);
+    padding: 10px clamp(12px, 3vw, 26px);
   }
 
   .heroBanner {
-    height: clamp(180px, 20vw, 240px);
+    height: clamp(130px, 18vw, 210px);
+  }
+
+  .card {
+    width: clamp(240px, 23vw, 320px);
   }
 }
 
-/* ================================================================
-   TOUCH DEVICES (Mobile/Tablet) - Remove hover effects
-   ================================================================ */
+/* ========================================
+   TOUCH DEVICES & ACCESSIBILITY
+   ======================================== */
 @media (hover: none) and (pointer: coarse) {
+  .card {
+    border-radius: 16px;
+  }
+
   .card:hover {
     transform: none;
   }
@@ -972,15 +912,14 @@ button {
   .btn:hover {
     transform: none;
   }
-
-  .contactLink:hover {
-    text-decoration: none;
-  }
 }
 
-/* ================================================================
-   PRINT STYLES
-   ================================================================ */
+/* Smooth scrolling for all browsers */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Print styles */
 @media print {
   .topbar,
   .modal,
