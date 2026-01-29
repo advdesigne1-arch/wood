@@ -1,12 +1,76 @@
 [
   {
-    "name": "BOIS BLANC",
-    "description": "Bois clair polyvalent.",
-    "image": "images/bois-blanc.jpg"
+    "id": "mdf",
+    "name": "MDF",
+    "description": "Panneau lisse — plusieurs finitions disponibles.",
+    "images": [
+      "images/mdf/mdf1.jpg",
+      "images/mdf/mdf2.jpg",
+      "images/mdf/mdf3.png"
+    ]
   },
   {
-    "name": "MDF",
-    "description": "Panneau lisse, plusieurs finitions.",
-    "image": "images/mdf.jpg"
+    "id": "bois-blanc",
+    "name": "Bois Blanc",
+    "description": "Finition légère et élégante, idéal pour les meubles modernes.",
+    "images": [
+      "images/bois-blanc.jpg"
+    ]
+  },
+  {
+    "id": "bois-americain",
+    "name": "Bois Américain",
+    "description": "Robustesse et authenticité, parfait pour les façades.",
+    "images": [
+      "images/bois-americain.jpg"
+    ]
+  },
+  {
+    "id": "bois-rouge",
+    "name": "Bois Rouge",
+    "description": "Couleur riche et naturelle, très apprécié en menuiserie.",
+    "images": [
+      "images/bois-rouge.jpg"
+    ]
+  },
+  {
+    "id": "chene",
+    "name": "Chêne",
+    "description": "Bois noble et durable, excellent pour tous les projets.",
+    "images": [
+      "images/chene.jpg"
+    ]
+  },
+  {
+    "id": "hetre",
+    "name": "Hêtre",
+    "description": "Finition lisse et homogène, idéal pour l'ébénisterie.",
+    "images": [
+      "images/hetre.jpg"
+    ]
+  },
+  {
+    "id": "melamine",
+    "name": "Mélamine",
+    "description": "Revêtement résistant, large gamme de couleurs disponible.",
+    "images": [
+      "images/melamine.jpg"
+    ]
+  },
+  {
+    "id": "bakelise",
+    "name": "Bakélisé",
+    "description": "Résistance maximale, excellent pour environnements humides.",
+    "images": [
+      "images/bakelise.jpg"
+    ]
+  },
+  {
+    "id": "sapeli",
+    "name": "Sapeli",
+    "description": "Bois tropical exotique, parfait pour les décorateurs.",
+    "images": [
+      "images/sapeli.jpg"
+    ]
   }
 ]
