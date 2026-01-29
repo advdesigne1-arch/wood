@@ -2,209 +2,149 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BOUALEM BOIS — Catalogue (vitrine)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BOUALEM BOIS — Catalogue</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <!-- Top bar -->
   <header class="topbar">
-    <div class="topbar__inner">
-      <a class="logo" href="#">
-        <span class="logo__mark" aria-hidden="true"></span>
-        <span class="logo__text">
-          <span class="logo__name">BOUALEM BOIS</span>
-          <span class="logo__sub">Catalogue • Vitrine</span>
-        </span>
-      </a>
+    <div class="topbarInner">
+      <div class="logo">
+        <div class="logoDot"></div>
+        <div class="logoText">
+          <b>BOUALEM BOIS</b>
+          <span>Catalogue • Vitrine</span>
+        </div>
+      </div>
 
       <nav class="nav">
-        <a href="#catalog">Catalogue</a>
+        <a href="#catalogue">Catalogue</a>
         <a href="#why">Pourquoi</a>
         <a href="#contact">Contact</a>
       </nav>
 
-      <div class="topbar__actions">
-        <button class="btn btn--ghost" id="btnQuote">Demander un devis</button>
-        <button class="btn btn--dark" id="btnWhatsApp">📞 +213 00 00 00 00</button>
+      <div class="actions">
+        <button class="btn" type="button">Demander un devis</button>
+        <button class="btn btnDark" type="button">📞 +213 00 00 00 00</button>
       </div>
     </div>
   </header>
 
-  <main class="page">
+  <main class="wrap">
+    <div class="heroBanner"></div>
 
-    <!-- HERO (3D floating design) -->
-    <section class="hero" id="home">
-      <!-- ✅ wood background -->
-      <div class="hero__bg" aria-hidden="true"></div>
-      <div class="hero__vignette" aria-hidden="true"></div>
-
-      <div class="hero__inner">
-        <div class="hero__left">
-          <div class="pill">Bois & panneaux — vitrine</div>
-
-          <h1 class="hero__title">
-            BOUALEM<br/>
-            <span class="outline">BOIS</span>
-          </h1>
-
-          <p class="hero__text">
-            Catalogue de types de bois disponibles pour vos projets : menuiserie,
-            agencement, mobilier et façades. Stock variable selon arrivage.
-          </p>
-
-          <div class="hero__cta">
-            <button class="btn btn--dark" id="btnWhatsApp2">Demander un devis</button>
-            <a class="btn btn--ghost" href="#catalog">Voir le catalogue</a>
-          </div>
-
-          <div class="hero__stats">
-            <div class="stat">
-              <div class="stat__num" id="statCount">9+</div>
-              <div class="stat__label">Types de bois</div>
-            </div>
-            <div class="stat">
-              <div class="stat__num">⚡</div>
-              <div class="stat__label">Réponse rapide</div>
-            </div>
-            <div class="stat">
-              <div class="stat__num">🚚</div>
-              <div class="stat__label">Selon zone</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right floating cards -->
-        <div class="hero__right">
-          <div class="float float--rating">
-            <div class="float__big">4.9★</div>
-            <div class="float__small">Clients satisfaits</div>
-            <div class="float__dots">
-              <span></span><span></span><span></span><span></span>
-            </div>
-          </div>
-
-          <div class="float float--chip">
-            <div class="chip__icon">🪵</div>
-            <div class="chip__text">
-              <div class="chip__title">Qualité & finition</div>
-              <div class="chip__sub">Contrôle visuel • choix</div>
-            </div>
-          </div>
-
-          <div class="float float--contact">
-            <div class="contactMini">
-              <div class="contactMini__title">Besoin d’un devis rapide ?</div>
-              <div class="contactMini__sub">WhatsApp • Réponse courte</div>
-              <button class="btn btn--dark btn--small" id="btnWhatsApp3">WhatsApp</button>
-            </div>
-          </div>
-
-          <!-- Decorative floating circles -->
-          <div class="orb orb--1" aria-hidden="true"></div>
-          <div class="orb orb--2" aria-hidden="true"></div>
-          <div class="orb orb--3" aria-hidden="true"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY -->
     <section class="section" id="why">
-      <div class="section__head">
-        <h2>Pourquoi choisir nos bois</h2>
-        <p>Avantages clés pour un résultat propre et durable.</p>
-      </div>
-
-      <div class="featureRow">
-        <div class="feature">
-          <div class="feature__icon">✅</div>
-          <div>
-            <div class="feature__title">Qualité constante</div>
-            <div class="feature__text">Sélection et contrôle visuel des panneaux.</div>
-          </div>
-        </div>
-
-        <div class="feature">
-          <div class="feature__icon">🔥</div>
-          <div>
-            <div class="feature__title">Bon rendu finition</div>
-            <div class="feature__text">Idéal pour agencement, mobilier, façades.</div>
-          </div>
-        </div>
-
-        <div class="feature">
-          <div class="feature__icon">🛠️</div>
-          <div>
-            <div class="feature__title">Facile à travailler</div>
-            <div class="feature__text">Découpe propre, compatibilité outillage.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CATALOG -->
-    <section class="section" id="catalog">
-      <div class="section__head section__head--row">
+      <div class="sectionHeader">
         <div>
-          <h2>Catalogue des produits</h2>
-          <p>Chaque type de bois avec une carte et sa description.</p>
-        </div>
-
-        <div class="controls">
-          <input class="input" id="search" placeholder="Rechercher (ex: MDF, CHÊNE...)" />
-          <button class="iconBtn" id="btnPrev" title="Précédent">◀</button>
-          <button class="iconBtn" id="btnNext" title="Suivant">▶</button>
+          <h2 class="hTitle">Pourquoi choisir nos bois</h2>
+          <p class="hSub">Avantages clés pour un résultat propre et durable.</p>
         </div>
       </div>
 
-      <!-- ✅ Cards like the white cards -->
-      <div class="catalogGrid" id="catalogList"></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+        <div class="box">
+          ✅ <b>Qualité constante</b>
+          <div class="hSub">Sélection & contrôle visuel des panneaux.</div>
+        </div>
+        <div class="box">
+          🔥 <b>Bon rendu finition</b>
+          <div class="hSub">Idéal pour agencement, mobilier, façades.</div>
+        </div>
+        <div class="box">
+          🛠️ <b>Facile à travailler</b>
+          <div class="hSub">Découpe propre, compatibilité outillage.</div>
+        </div>
+      </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="section__head">
-        <h2>Contact</h2>
-        <p>Demandez un devis ou une disponibilité.</p>
+    <div style="height:14px"></div>
+
+    <section class="section" id="catalogue">
+      <div class="sectionHeader">
+        <div>
+          <h2 class="hTitle">Catalogue des produits</h2>
+          <p class="hSub">Chaque type de bois avec une carte et sa description.</p>
+        </div>
+
+        <div class="tools">
+          <input id="searchInput" class="search" placeholder="Rechercher (ex: MDF, CHÊNE...)" />
+          <button id="btnPrev" class="iconBtn" title="Précédent">◀</button>
+          <button id="btnNext" class="iconBtn" title="Suivant">▶</button>
+        </div>
       </div>
 
-      <div class="contactGrid">
-        <div class="contactBox">
-          <h3>Informations</h3>
-          <div class="line"><span>📍</span> Algeria</div>
-          <div class="line"><span>📞</span> +213 00 00 00 00</div>
-          <div class="line"><span>🕒</span> 09:00 — 18:00</div>
-          <div class="line"><span>🚚</span> Livraison (selon zone)</div>
+      <div id="catalogError" class="error"></div>
 
-          <div class="contactActions">
-            <button class="btn btn--dark" id="btnWhatsApp4">WhatsApp</button>
-            <a class="btn btn--ghost" href="#catalog">Voir catalogue</a>
+      <div class="cardsFrame">
+        <div id="cardsTrack" class="cardsTrack" aria-label="Catalogue"></div>
+      </div>
+    </section>
+
+    <div style="height:14px"></div>
+
+    <section class="section" id="contact">
+      <div class="sectionHeader">
+        <div>
+          <h2 class="hTitle">Contact</h2>
+          <p class="hSub">Demandez un devis ou une disponibilité.</p>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="box">
+          <h3>Informations</h3>
+          <div class="list">
+            📍 Algeria<br/>
+            📞 +213 00 00 00 00<br/>
+            🕘 09:00 — 18:00<br/>
+            🚚 Livraison (selon zone)
+          </div>
+
+          <div class="actionsRow">
+            <button class="btn btnDark">WhatsApp</button>
+            <button class="btn">Voir catalogue</button>
           </div>
         </div>
 
-        <div class="contactBox contactBox--dark">
-          <h3>Message rapide</h3>
-          <p>
-            Cliquez sur WhatsApp et envoyez :
-            <br/><strong>“Bonjour, je voudrais un devis + dimensions + type de bois.”</strong>
-          </p>
-          <div class="note">📌 Stock variable selon arrivage.</div>
+        <div class="box" style="background:#1b1b1b;color:#fff;border:0">
+          <h3 style="margin:0 0 8px">Message rapide</h3>
+          <div style="opacity:.85;font-weight:700;line-height:1.5">
+            Cliquez sur WhatsApp et envoyez :<br/>
+            “Bonjour, je voudrais un devis + dimensions + type de bois.”
+          </div>
+          <div style="margin-top:12px;padding:12px;border-radius:16px;background:rgba(255,255,255,.08);font-weight:800">
+            📌 Stock variable selon arrivage.
+          </div>
         </div>
       </div>
     </section>
-
-    <footer class="footer">
-      <div>© <span id="year"></span> — BOUALEM BOIS</div>
-      <div class="footer__links">
-        <a href="#catalog">Catalogue</a>
-        <a href="#why">Pourquoi</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </footer>
-
   </main>
 
-  <script src="app.js"></script>
+  <!-- Modal -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div id="modalBackdrop" class="modalBackdrop"></div>
+    <div class="modalPanel" role="dialog" aria-modal="true">
+      <div class="modalHead">
+        <div>
+          <h3 id="modalTitle">Produit</h3>
+          <p id="modalDesc"></p>
+        </div>
+        <button id="modalClose" class="modalClose" aria-label="Fermer">✕</button>
+      </div>
+
+      <div class="modalBody">
+        <div class="modalMain">
+          <img id="modalMainImg" alt="Produit" />
+        </div>
+        <div class="modalSide">
+          <h4>Autres images</h4>
+          <div id="modalThumbs" class="thumbs"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
 </body>
 </html>

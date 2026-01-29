@@ -1,189 +1,260 @@
-const API_URL = "/api/products";
+/* =========================
+   BOUALEM BOIS — Frontend
+   Works on:
+   - Localhost with backend: /api/products
+   - GitHub Pages (no backend): ./products.json
+========================= */
 
-// ===== Helpers =====
-function $(id) { return document.getElementById(id); }
-function norm(s){ return (s || "").trim().toUpperCase(); }
+const $ = (q, el = document) => el.querySelector(q);
+const $$ = (q, el = document) => Array.from(el.querySelectorAll(q));
 
-function openWhatsApp(){
-  const phone = "213000000000"; // اكتب رقمك بدون +
-  const text = encodeURIComponent("Bonjour, je voudrais un devis (dimensions + type de bois).");
-  window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
+const state = {
+  products: [],
+  filtered: [],
+  activeIndex: 0
+};
+
+function isLocalhost() {
+  return (
+    location.hostname === "localhost" ||
+    location.hostname === "127.0.0.1"
+  );
 }
 
-// ===== Footer year =====
-const yearEl = $("year");
-if (yearEl) yearEl.textContent = new Date().getFullYear();
+// Try backend first on localhost, otherwise use static json
+async function loadProducts() {
+  const endpoints = [];
 
-// Buttons if exist
-["btnWhatsApp","btnWhatsApp2","btnWhatsApp3","btnWhatsApp4","btnQuote"].forEach(id=>{
-  const el = $(id);
-  if(el) el.addEventListener("click", openWhatsApp);
-});
+  if (isLocalhost()) {
+    endpoints.push("/api/products"); // your express route
+  }
+  endpoints.push("./products.json"); // GitHub Pages fallback
 
-// ===== Modal (Gallery) =====
-let currentGallery = [];
-let currentIndex = 0;
+  let lastErr = null;
 
-function ensureModal(){
-  if ($("modalOverlay")) return;
+  for (const url of endpoints) {
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`${url} -> ${res.status}`);
+      const data = await res.json();
 
-  const overlay = document.createElement("div");
-  overlay.className = "modal-overlay";
-  overlay.id = "modalOverlay";
+      // backend returns array? or json? normalize
+      const products =
+        Array.isArray(data) ? data :
+        Array.isArray(data?.products) ? data.products :
+        Array.isArray(data?.items) ? data.items :
+        [];
 
-  overlay.innerHTML = `
-    <div class="modal" role="dialog" aria-modal="true">
-      <div class="modal-left">
-        <div class="modal-image" id="modalImage"></div>
+      if (!products.length) throw new Error("No products found in response.");
+      return products;
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+
+  throw lastErr || new Error("Failed to load products");
+}
+
+function normalizeProduct(p) {
+  // Support old backend format {id,name,description} without images
+  const slug = p.slug || (p.name || "").toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
+  const cover = p.cover || p.image || `images/${slug}.jpg`;
+  const gallery = Array.isArray(p.gallery) && p.gallery.length ? p.gallery : [cover];
+
+  return {
+    id: p.id,
+    slug,
+    name: p.name || "Produit",
+    description: p.description || "",
+    cover,
+    gallery
+  };
+}
+
+function setError(msg) {
+  const box = $("#catalogError");
+  box.textContent = msg || "";
+  box.classList.toggle("show", !!msg);
+}
+
+function renderCards(list) {
+  const track = $("#cardsTrack");
+  track.innerHTML = "";
+
+  list.forEach((p) => {
+    const card = document.createElement("article");
+    card.className = "card";
+    card.tabIndex = 0;
+
+    card.innerHTML = `
+      <div class="cardMedia">
+        <img class="cardImg" src="${p.cover}" alt="${escapeHtml(p.name)}" loading="lazy" />
       </div>
-
-      <div class="modal-right">
-        <div class="modal-actions">
-          <button class="modal-close" id="modalClose">Fermer ✕</button>
-          <div class="modal-nav">
-            <button class="modal-btn" id="modalPrev">◀</button>
-            <button class="modal-btn" id="modalNext">▶</button>
-          </div>
+      <div class="cardBody">
+        <h3 class="cardTitle">${escapeHtml(p.name)}</h3>
+        <p class="cardDesc">${escapeHtml(p.description)}</p>
+        <div class="cardActions">
+          <button class="pill" type="button">Voir</button>
+          <span class="tag">Vitrine</span>
         </div>
-
-        <h3 class="modal-title" id="modalTitle"></h3>
-        <p class="modal-desc" id="modalDesc"></p>
-
-        <div class="modal-thumbs" id="modalThumbs"></div>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(overlay);
-
-  $("modalClose").addEventListener("click", closeModal);
-  $("modalPrev").addEventListener("click", ()=>showAt(currentIndex - 1));
-  $("modalNext").addEventListener("click", ()=>showAt(currentIndex + 1));
-
-  overlay.addEventListener("click", (e)=>{
-    if(e.target === overlay) closeModal();
-  });
-
-  document.addEventListener("keydown", (e)=>{
-    if(overlay.style.display !== "flex") return;
-    if(e.key === "Escape") closeModal();
-    if(e.key === "ArrowLeft") showAt(currentIndex - 1);
-    if(e.key === "ArrowRight") showAt(currentIndex + 1);
-  });
-}
-
-function openModal(product){
-  ensureModal();
-
-  const overlay = $("modalOverlay");
-  const modalTitle = $("modalTitle");
-  const modalDesc = $("modalDesc");
-
-  modalTitle.textContent = product.name || "";
-  modalDesc.textContent  = product.description || "";
-
-  // ✅ gallery from backend
-  const cover = product.coverImage || "images/bois-blanc.jpg";
-  const gallery = Array.isArray(product.gallery) && product.gallery.length ? product.gallery : [cover];
-
-  currentGallery = gallery;
-  currentIndex = 0;
-
-  renderThumbs();
-  showAt(0);
-
-  overlay.style.display = "flex";
-}
-
-function closeModal(){
-  const overlay = $("modalOverlay");
-  if(overlay) overlay.style.display = "none";
-}
-
-function renderThumbs(){
-  const thumbs = $("modalThumbs");
-  thumbs.innerHTML = "";
-
-  currentGallery.forEach((src, i)=>{
-    const img = document.createElement("img");
-    img.src = src;
-    img.className = "modal-thumb" + (i === currentIndex ? " active" : "");
-    img.addEventListener("click", ()=>showAt(i));
-    thumbs.appendChild(img);
-  });
-}
-
-function showAt(i){
-  if(!currentGallery.length) return;
-
-  if(i < 0) i = currentGallery.length - 1;
-  if(i >= currentGallery.length) i = 0;
-  currentIndex = i;
-
-  const modalImage = $("modalImage");
-  modalImage.style.backgroundImage = `url("${currentGallery[currentIndex]}")`;
-
-  document.querySelectorAll(".modal-thumb").forEach((t, idx)=>{
-    t.classList.toggle("active", idx === currentIndex);
-  });
-}
-
-// ===== Catalogue rendering =====
-const catalog = $("catalogList");
-const searchInput = $("search");
-const statCount = $("statCount");
-
-function createCard(product){
-  const card = document.createElement("div");
-  card.className = "product-card";
-
-  const cover = product.coverImage || "images/bois-blanc.jpg";
-
-  card.innerHTML = `
-    <div class="product-img" style="background-image:url('${cover}')"></div>
-    <div class="product-body">
-      <div class="product-name">${product.name || ""}</div>
-      <div class="product-desc">${product.description || ""}</div>
-      <div class="product-chip">Vitrine</div>
-    </div>
-  `;
-
-  card.addEventListener("click", ()=>openModal(product));
-  return card;
-}
-
-function renderProducts(list){
-  catalog.innerHTML = "";
-  list.forEach(p => catalog.appendChild(createCard(p)));
-  if(statCount) statCount.textContent = `${list.length}+`;
-}
-
-function enableSearch(all){
-  if(!searchInput) return;
-  searchInput.addEventListener("input", ()=>{
-    const q = norm(searchInput.value);
-    const filtered = all.filter(p => norm(p.name).includes(q));
-    renderProducts(filtered);
-  });
-}
-
-// ===== Init =====
-async function init(){
-  try{
-    const res = await fetch(API_URL);
-    const products = await res.json();
-
-    renderProducts(products);
-    enableSearch(products);
-
-  }catch(err){
-    console.error(err);
-    catalog.innerHTML = `
-      <div style="padding:16px;color:#b00;font-weight:900">
-        Error: API not reachable. Ensure backend is running on http://localhost:3000
       </div>
     `;
-  }
+
+    // If image path is wrong, show a clean placeholder instead of breaking layout
+    const img = $(".cardImg", card);
+    img.addEventListener("error", () => {
+      img.src =
+        "data:image/svg+xml;charset=utf-8," +
+        encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450">
+          <rect width="100%" height="100%" fill="#f2f2f2"/>
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+            fill="#8a8a8a" font-family="Arial" font-size="22">Image non disponible</text>
+        </svg>`);
+    });
+
+    // open modal
+    card.addEventListener("click", () => openModal(p));
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openModal(p);
+      }
+    });
+
+    track.appendChild(card);
+  });
+
+  // reset scroll to start
+  track.scrollTo({ left: 0, behavior: "instant" });
 }
 
-init();
+function openModal(product) {
+  $("#modalTitle").textContent = product.name;
+  $("#modalDesc").textContent = product.description;
+
+  const mainImg = $("#modalMainImg");
+  const thumbs = $("#modalThumbs");
+  thumbs.innerHTML = "";
+
+  const setMain = (src) => {
+    mainImg.src = src;
+  };
+
+  setMain(product.gallery[0]);
+
+  product.gallery.forEach((src, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "thumb";
+    b.innerHTML = `<img src="${src}" alt="${escapeHtml(product.name)} ${i + 1}" loading="lazy">`;
+    b.addEventListener("click", () => setMain(src));
+    thumbs.appendChild(b);
+
+    // image fallback
+    const timg = $("img", b);
+    timg.addEventListener("error", () => {
+      timg.src =
+        "data:image/svg+xml;charset=utf-8," +
+        encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240">
+          <rect width="100%" height="100%" fill="#f2f2f2"/>
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+            fill="#8a8a8a" font-family="Arial" font-size="14">No image</text>
+        </svg>`);
+    });
+  });
+
+  $("#modal").classList.add("open");
+  document.body.classList.add("noScroll");
+}
+
+function closeModal() {
+  $("#modal").classList.remove("open");
+  document.body.classList.remove("noScroll");
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function applySearch() {
+  const q = ($("#searchInput").value || "").trim().toLowerCase();
+  state.filtered = !q
+    ? state.products
+    : state.products.filter((p) =>
+        (p.name + " " + p.description).toLowerCase().includes(q)
+      );
+
+  renderCards(state.filtered);
+}
+
+function scrollCards(dir = 1) {
+  const track = $("#cardsTrack");
+  const card = $(".card", track);
+  const step = card ? card.getBoundingClientRect().width + 18 : 360;
+  track.scrollBy({ left: step * dir, behavior: "smooth" });
+}
+
+function enableDragScroll() {
+  const track = $("#cardsTrack");
+
+  let isDown = false;
+  let startX = 0;
+  let scrollLeft = 0;
+
+  track.addEventListener("pointerdown", (e) => {
+    isDown = true;
+    track.setPointerCapture(e.pointerId);
+    startX = e.clientX;
+    scrollLeft = track.scrollLeft;
+    track.classList.add("dragging");
+  });
+
+  track.addEventListener("pointermove", (e) => {
+    if (!isDown) return;
+    const dx = e.clientX - startX;
+    track.scrollLeft = scrollLeft - dx;
+  });
+
+  const end = () => {
+    if (!isDown) return;
+    isDown = false;
+    track.classList.remove("dragging");
+  };
+
+  track.addEventListener("pointerup", end);
+  track.addEventListener("pointercancel", end);
+  track.addEventListener("mouseleave", end);
+}
+
+async function init() {
+  try {
+    setError("");
+    const raw = await loadProducts();
+    state.products = raw.map(normalizeProduct);
+    state.filtered = state.products;
+    renderCards(state.filtered);
+  } catch (e) {
+    // ✅ No red scary error on GitHub Pages — show friendly message
+    setError("تعذر تحميل البيانات. تأكد أن ملف products.json موجود وأن الصور داخل مجلد images.");
+    console.error(e);
+  }
+
+  $("#searchInput").addEventListener("input", applySearch);
+  $("#btnPrev").addEventListener("click", () => scrollCards(-1));
+  $("#btnNext").addEventListener("click", () => scrollCards(1));
+
+  $("#modalClose").addEventListener("click", closeModal);
+  $("#modalBackdrop").addEventListener("click", closeModal);
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  enableDragScroll();
+}
+
+document.addEventListener("DOMContentLoaded", init);
