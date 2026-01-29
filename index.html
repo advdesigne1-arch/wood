@@ -7,18 +7,21 @@
   <meta name="description" content="BOUALEM BOIS - Catalogue de produits en bois de qualité" />
   <title>BOUALEM BOIS — Catalogue</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 </head>
 
 <body>
   <header class="topbar">
     <div class="topbarInner">
-      <div class="logo">
-        <div class="logoDot"></div>
-        <div class="logoText">
-          <b>BOUALEM BOIS</b>
-          <span>Catalogue • Vitrine</span>
+      <a href="#" class="logoLink">
+        <div class="logo">
+          <div class="logoDot"></div>
+          <div class="logoText">
+            <b>BOUALEM BOIS</b>
+            <span>Catalogue • Vitrine</span>
+          </div>
         </div>
-      </div>
+      </a>
 
       <nav class="nav">
         <a href="#catalogue">Catalogue</a>
@@ -28,7 +31,7 @@
 
       <div class="actions">
         <button class="btn" type="button">Demander un devis</button>
-        <button class="btn btnDark" type="button">📞 +213 00 00 00 00</button>
+        <a href="tel:+213000000000" class="btn btnDark">📞 +213 00 00 00 00</a>
       </div>
     </div>
   </header>
@@ -85,36 +88,49 @@
     <section class="section" id="contact">
       <div class="sectionHeader">
         <div>
-          <h2 class="hTitle">Contact</h2>
-          <p class="hSub">Demandez un devis ou une disponibilité.</p>
+          <h2 class="hTitle">Contact & Localisation</h2>
+          <p class="hSub">Visitez-nous ou contactez-nous directement.</p>
         </div>
       </div>
 
-      <div class="grid2">
-        <div class="box">
-          <h3>Informations</h3>
-          <div class="list">
-            📍 Algeria<br/>
-            📞 +213 00 00 00 00<br/>
-            🕘 09:00 — 18:00<br/>
-            🚚 Livraison (selon zone)
+      <div class="contactLayout">
+        <div class="contactInfo">
+          <div class="box">
+            <h3>📍 Nos Informations</h3>
+            <div class="list">
+              <p><strong>Adresse:</strong> Algérie</p>
+              <p><strong>Téléphone:</strong> <a href="tel:+213000000000" class="contactLink">+213 00 00 00 00</a></p>
+              <p><strong>Horaires:</strong> 09:00 — 18:00</p>
+              <p><strong>Livraison:</strong> Selon zone</p>
+            </div>
+
+            <div class="actionsRow">
+              <a href="https://wa.me/213000000000?text=Bonjour%2C%20je%20voudrais%20un%20devis%20%2B%20dimensions%20%2B%20type%20de%20bois." target="_blank" class="btn btnDark" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                📱 WhatsApp
+              </a>
+              <a href="tel:+213000000000" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                ☎️ Appeler
+              </a>
+            </div>
           </div>
 
-          <div class="actionsRow">
-            <button class="btn btnDark">WhatsApp</button>
-            <button class="btn">Voir catalogue</button>
+          <div class="box" style="background:#1b1b1b;color:#fff;border:0">
+            <h3 style="margin:0 0 8px">💬 Message rapide</h3>
+            <div style="opacity:.85;font-weight:700;line-height:1.5;margin-bottom:12px">
+              Cliquez sur WhatsApp و envoyez :<br/>
+              "Bonjour, je voudrais un devis + dimensions + type de bois."
+            </div>
+            <a href="https://wa.me/213000000000?text=Bonjour%2C%20je%20voudrais%20un%20devis%20%2B%20dimensions%20%2B%20type%20de%20bois." target="_blank" class="btn" style="background: #25D366; color: white; text-decoration: none; display: inline-block; border: 0; width: 100%;">
+              Envoyer sur WhatsApp
+            </a>
+            <div style="margin-top:12px;padding:12px;border-radius:16px;background:rgba(255,255,255,.08);font-weight:800;font-size:12px">
+              📌 Stock variable selon arrivage.
+            </div>
           </div>
         </div>
 
-        <div class="box" style="background:#1b1b1b;color:#fff;border:0">
-          <h3 style="margin:0 0 8px">Message rapide</h3>
-          <div style="opacity:.85;font-weight:700;line-height:1.5">
-            Cliquez sur WhatsApp et envoyez :<br/>
-            “Bonjour, je voudrais un devis + dimensions + type de bois.”
-          </div>
-          <div style="margin-top:12px;padding:12px;border-radius:16px;background:rgba(255,255,255,.08);font-weight:800">
-            📌 Stock variable selon arrivage.
-          </div>
+        <div class="mapContainer">
+          <div id="map"></div>
         </div>
       </div>
     </section>
@@ -144,6 +160,7 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="app.js" defer></script>
 </body>
 </html>

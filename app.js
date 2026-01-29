@@ -19,20 +19,29 @@ let PRODUCTS = [];
 let currentProductId = null;
 let currentImageIndex = 0;
 
-/* ========== LOAD products.json ========== */
+/* ========== LOAD PRODUCTS FROM API OR JSON ========== */
 async function loadProducts() {
   try {
-    const response = await fetch("products.json");
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    // Try to load from API first (backend)
+    let response = await fetch("/api/products").catch(() => null);
+    
+    // Fallback to products.json if API fails
+    if (!response || !response.ok) {
+      console.log("API not available, using products.json...");
+      response = await fetch("products.json");
     }
+    
+    if (!response || !response.ok) {
+      throw new Error(`HTTP error! status: ${response?.status}`);
+    }
+    
     PRODUCTS = await response.json();
     renderProducts(PRODUCTS);
     catalogError.classList.remove("show");
   } catch (error) {
     console.error("Error loading products:", error);
     catalogError.classList.add("show");
-    catalogError.textContent = "❌ Impossible de charger les produits. Vérifiez products.json";
+    catalogError.textContent = "❌ Impossible de charger les produits. Vérifiez products.json ou backend.";
   }
 }
 
@@ -173,6 +182,40 @@ function handleSwipe() {
   }
 }
 
+/* ========== MAP INITIALIZATION ========== */
+function initMap() {
+  const mapElement = document.getElementById("map");
+  
+  // Return if map element doesn't exist (e.g., on mobile)
+  if (!mapElement) {
+    console.log("Map element not found");
+    return;
+  }
+
+  // Create map centered on Algiers, Algeria
+  const map = L.map("map").setView([36.7538, 3.0588], 13);
+
+  // Add OpenStreetMap tiles
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors",
+    maxZoom: 19,
+  }).addTo(map);
+
+  // Add marker for BOUALEM BOIS
+  const marker = L.marker([36.7538, 3.0588], {
+    title: "BOUALEM BOIS",
+  }).addTo(map);
+
+  marker.bindPopup(
+    `<div style="font-weight: bold; padding: 8px; text-align: center;">
+      <p style="margin: 0 0 8px; font-size: 14px; font-weight: 800;">BOUALEM BOIS</p>
+      <p style="margin: 0 0 4px; font-size: 12px;">📍 Algérie</p>
+      <p style="margin: 0 0 4px; font-size: 12px;">📞 +213 00 00 00 00</p>
+      <p style="margin: 0; font-size: 12px;">🕘 09:00 — 18:00</p>
+    </div>`
+  ).openPopup();
+}
+
 /* ========== SEARCH ========== */
 searchInput.addEventListener("input", (e) => {
   const query = e.target.value.toLowerCase();
@@ -185,3 +228,4 @@ searchInput.addEventListener("input", (e) => {
 
 /* ========== INIT ========== */
 loadProducts();
+initMap();

@@ -82,11 +82,16 @@ button {
   flex-wrap: wrap;
 }
 
+.logoLink {
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
 .logo {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.85);
   box-shadow: var(--shadow2);
@@ -109,9 +114,10 @@ button {
 }
 
 .logoText b {
-  font-size: 12px;
-  letter-spacing: 0.3px;
-  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  font-weight: 800;
+  color: #000;
 }
 
 .logoText span {
@@ -406,6 +412,45 @@ button {
   gap: 12px;
 }
 
+/* =========== NEW CONTACT LAYOUT =========== */
+.contactLayout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.contactInfo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.mapContainer {
+  width: 100%;
+  height: 300px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.contactLink {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+.contactLink:hover {
+  color: #0052a3;
+  text-decoration: underline;
+}
+
 /* =========== MODAL =========== */
 .noScroll {
   overflow: hidden;
@@ -640,6 +685,18 @@ button {
     grid-template-columns: 1.1fr 0.9fr;
   }
 
+  .contactLayout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contactInfo {
+    grid-template-columns: 1fr;
+  }
+
+  .mapContainer {
+    height: 350px;
+  }
+
   .modalPanel {
     width: 90%;
   }
@@ -680,6 +737,9 @@ button {
   }
 
   .nav {
+    gap: 16px;
+    font-size: 13px;
+  }
     gap: 16px;
     font-size: 13px;
   }
@@ -772,6 +832,14 @@ button {
   /* CONTACT */
   .grid2 {
     grid-template-columns: 1.1fr 0.9fr;
+  }
+
+  .contactLayout {
+    grid-template-columns: 1fr 1.2fr;
+  }
+
+  .mapContainer {
+    height: 400px;
   }
 
   /* MODAL */
