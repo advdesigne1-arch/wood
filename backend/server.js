@@ -13,8 +13,8 @@ app.use(express.json());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Paths
-const frontendPath = path.join(__dirname, "..", "frontend");
+// Paths - الملفات الثابتة في المجلد الأب (root)
+const frontendPath = path.join(__dirname, "..");
 
 // ✅ Serve frontend static files (HTML/CSS/JS + images folder)
 app.use(express.static(frontendPath));
@@ -32,4 +32,5 @@ app.get("*", (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
+  console.log(`📁 Serving files from: ${frontendPath}`);
 });
