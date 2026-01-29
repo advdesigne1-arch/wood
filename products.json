@@ -1,76 +1,12 @@
-{
-  "products": [
-    {
-      "id": 1,
-      "slug": "bois-blanc",
-      "name": "BOIS BLANC",
-      "description": "Bois clair polyvalent.",
-      "cover": "images/bois-blanc.jpg",
-      "gallery": ["images/bois-blanc.jpg"]
-    },
-    {
-      "id": 2,
-      "slug": "bakelise",
-      "name": "BAKÉLISÉ",
-      "description": "Bois bakélisé résistant.",
-      "cover": "images/bakelise.jpg",
-      "gallery": ["images/bakelise.jpg"]
-    },
-    {
-      "id": 3,
-      "slug": "chene",
-      "name": "CHÊNE",
-      "description": "Bois noble et solide.",
-      "cover": "images/chene.jpg",
-      "gallery": ["images/chene.jpg"]
-    },
-    {
-      "id": 4,
-      "slug": "sapeli",
-      "name": "SAPELI",
-      "description": "Bois exotique chaleureux.",
-      "cover": "images/sapeli.jpg",
-      "gallery": ["images/sapeli.jpg"]
-    },
-    {
-      "id": 5,
-      "slug": "mdf",
-      "name": "MDF",
-      "description": "Panneau lisse — plusieurs finitions disponibles.",
-      "cover": "images/mdf/mdf1.jpg",
-      "gallery": ["images/mdf/mdf1.jpg", "images/mdf/mdf2.jpg", "images/mdf/mdf3.png"]
-    },
-    {
-      "id": 6,
-      "slug": "hetre",
-      "name": "HÊTRE",
-      "description": "Bois dur et clair.",
-      "cover": "images/hetre.jpg",
-      "gallery": ["images/hetre.jpg"]
-    },
-    {
-      "id": 7,
-      "slug": "bois-rouge",
-      "name": "BOIS ROUGE",
-      "description": "Bois décoratif rougeâtre.",
-      "cover": "images/bois-rouge.jpg",
-      "gallery": ["images/bois-rouge.jpg"]
-    },
-    {
-      "id": 8,
-      "slug": "melamine",
-      "name": "MÉLAMINÉ",
-      "description": "Panneau pratique — couleurs & décors variés.",
-      "cover": "images/melamine.jpg",
-      "gallery": ["images/melamine.jpg"]
-    },
-    {
-      "id": 9,
-      "slug": "bois-americain",
-      "name": "BOIS AMÉRICAIN",
-      "description": "Bois de qualité importée.",
-      "cover": "images/bois-americain.jpg",
-      "gallery": ["images/bois-americain.jpg"]
-    }
-  ]
-}
+[
+  {
+    "name": "BOIS BLANC",
+    "description": "Bois clair polyvalent.",
+    "image": "images/bois-blanc.jpg"
+  },
+  {
+    "name": "MDF",
+    "description": "Panneau lisse, plusieurs finitions.",
+    "image": "images/mdf.jpg"
+  }
+]
