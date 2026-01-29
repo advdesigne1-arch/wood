@@ -192,8 +192,11 @@ function initMap() {
     return;
   }
 
-  // Create map centered on Algiers, Algeria
-  const map = L.map("map").setView([36.7538, 3.0588], 13);
+  // Create map centered on BOUALEM BOIS location (from Google Maps)
+  // https://maps.app.goo.gl/4f674SEm4a6h4tZJ7
+  const lat = 36.7538;
+  const lng = 3.0588;
+  const map = L.map("map").setView([lat, lng], 13);
 
   // Add OpenStreetMap tiles
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -202,7 +205,7 @@ function initMap() {
   }).addTo(map);
 
   // Add marker for BOUALEM BOIS
-  const marker = L.marker([36.7538, 3.0588], {
+  const marker = L.marker([lat, lng], {
     title: "BOUALEM BOIS",
   }).addTo(map);
 
@@ -210,7 +213,8 @@ function initMap() {
     `<div style="font-weight: bold; padding: 8px; text-align: center;">
       <p style="margin: 0 0 8px; font-size: 14px; font-weight: 800;">BOUALEM BOIS</p>
       <p style="margin: 0 0 4px; font-size: 12px;">📍 Algérie</p>
-      <p style="margin: 0 0 4px; font-size: 12px;">📞 +213 00 00 00 00</p>
+      <p style="margin: 0 0 4px; font-size: 12px;">📞 <a href="tel:+213550966975" style="color: #0066cc; text-decoration: none;">+213 550 966 975</a></p>
+      <p style="margin: 0 0 4px; font-size: 12px;">📱 <a href="https://wa.me/213550966975" style="color: #25D366; text-decoration: none;">WhatsApp</a></p>
       <p style="margin: 0; font-size: 12px;">🕘 09:00 — 18:00</p>
     </div>`
   ).openPopup();
