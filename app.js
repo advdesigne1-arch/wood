@@ -193,10 +193,11 @@ function initMap() {
   }
 
   // Create map centered on BOUALEM BOIS location (from Google Maps)
+  // Plus Code: Q68Q+F6M (Algiers, Algeria)
   // https://maps.app.goo.gl/4f674SEm4a6h4tZJ7
-  const lat = 36.7538;
-  const lng = 3.0588;
-  const map = L.map("map").setView([lat, lng], 13);
+  const lat = 36.75384;
+  const lng = 3.05878;
+  const map = L.map("map").setView([lat, lng], 15);
 
   // Add OpenStreetMap tiles
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
